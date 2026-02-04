@@ -7,8 +7,6 @@ import Footer from './components/Footer';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
 import Providers from './pages/Providers';
 import BookAppointment from './pages/BookAppointment';
 import MyAppointment from './pages/MyAppointment';
