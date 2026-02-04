@@ -12,6 +12,7 @@ import BookAppointment from './pages/BookAppointment';
 import MyAppointment from './pages/MyAppointment';
 import AdminDashboard from './pages/AdminDashboard';
 import ProviderDashboard from './pages/ProviderDashboard';
+import Provider from './pages/Provider';
 
 function PrivateRoute({ children, roles }) {
   const { isAuthenticated, user } = useAuth();
@@ -62,21 +63,26 @@ function AppRoutes() {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <LoginModal />
-      <SignupModal />
-      <ModalRouteSync />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/providers" element={<ProvidersEntry />} />
-        <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
-        <Route path="/my-appointments" element={<PrivateRoute><MyAppointment /></PrivateRoute>} />
-        <Route path="/login" element={<Home />} />
-        <Route path="/signup" element={<Home />} />
-        <Route path="/admin" element={<PrivateRoute roles={["admin"]}><AdminDashboard /></PrivateRoute>} />
-        <Route path="/provider" element={<PrivateRoute roles={["provider"]}><ProviderDashboard /></PrivateRoute>} />
-      </Routes>
-      <Footer />
+      <div className="app-root">
+        <main className="app-content">
+          <Navbar />
+          <LoginModal />
+          <SignupModal />
+          <ModalRouteSync />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/providers" element={<ProvidersEntry />} />
+            <Route path="/provider/:id" element={<Provider />} />
+            <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
+            <Route path="/my-appointments" element={<PrivateRoute><MyAppointment /></PrivateRoute>} />
+            <Route path="/login" element={<Home />} />
+            <Route path="/signup" element={<Home />} />
+            <Route path="/admin" element={<PrivateRoute roles={["admin"]}><AdminDashboard /></PrivateRoute>} />
+            <Route path="/provider" element={<PrivateRoute roles={["provider"]}><ProviderDashboard /></PrivateRoute>} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
