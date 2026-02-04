@@ -1,10 +1,14 @@
 import axios from 'axios';
 
-// Set a global default base URL (user provided)
-axios.defaults.baseURL = "https://autoattend-backend.onrender.com";
+// Preferred: pick up the API base from environment injected at build time (Netlify: REACT_APP_API_URL).
+// Fallback: use the known Render service URL so builds still work if env wasn't set.
+const FALLBACK_API = 'https://booking-app-s1m8.onrender.com/api';
+const API_BASE = process.env.REACT_APP_API_URL || FALLBACK_API;
 
-// Use environment variable if provided, otherwise build from the axios default base
-const API_BASE = process.env.REACT_APP_API_URL || `${axios.defaults.baseURL}/api`;
+if (process.env.NODE_ENV === 'production' && (!process.env.REACT_APP_API_URL || process.env.REACT_APP_API_URL.includes('localhost'))) {
+  // eslint-disable-next-line no-console
+  console.warn('[apiClient] REACT_APP_API_URL missing or set to localhost - using fallback:', API_BASE);
+}
 
 const api = axios.create({
   baseURL: API_BASE,
