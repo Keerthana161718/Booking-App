@@ -1,0 +1,11 @@
+.book-page{ padding:48px 20px; min-height:calc(100vh - 72px); display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,var(--bg-dark), rgba(18,10,28,0.98)) }
+.card{ width:480px; padding:26px; border-radius:14px; background: linear-gradient(180deg,var(--card-bg), rgba(255,255,255,0.01)); box-shadow:0 28px 80px rgba(12,8,20,0.6); border:1px solid var(--glass-border) }
+.book-form{ display:flex; flex-direction:column; gap:12px }
+label{ font-size:0.9rem; color:var(--muted) }
+input{ padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); outline:none; background:transparent; color:var(--text) }
+input:focus{ box-shadow:0 12px 30px rgba(124,58,237,0.06); border-color:rgba(124,58,237,0.12) }
+.btn.primary{ margin-top:8px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:var(--text); border:none; padding:12px; border-radius:12px; font-weight:700 }
+.alert{ color:#9fe6bf; padding:10px; border-radius:10px; background:linear-gradient(90deg, rgba(124,58,237,0.04), rgba(91,33,182,0.02)); }
+
+.success{ animation: pop .4s ease; transform-origin:center; }
+@keyframes pop{ from{ transform: scale(.96); opacity:0 } to{ transform: scale(1); opacity:1 } }

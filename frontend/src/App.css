@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+:root{
+  --maxW:1100px;
+  /* Light SaaS palette */
+  --bg: #f8fafc; /* page background */
+  --surface: #ffffff; /* cards and surfaces */
+  --muted: #6b7280; /* subdued text */
+  --accent-1: #3b82f6; /* blue-500 */
+  --accent-2: #2563eb; /* blue-600 */
+  --success: #10b981;
+  --danger: #ef4444;
+  --glass-border: rgba(2,6,23,0.04);
+  --text: #0f172a; /* slate-900 */
+  --subtle: #f1f5f9; /* very light gray */
+  --card-shadow: 0 10px 30px rgba(16,24,40,0.06);
+  --radius: 12px;
+  /* legacy names compatibility */
+  --accent1: var(--accent-1);
+  --accent2: var(--accent-2);
+  --card-bg: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,249,255,0.94));
+  --glass-border: rgba(15,23,42,0.04);
+
+}
+
+*{ box-sizing:border-box }
+html,body,#root{ height:100% }
+body{ font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif; margin:0; background: linear-gradient(180deg,var(--bg) 0%, #eef2ff 60%); color:var(--text); -webkit-font-smoothing:antialiased }
+.container{ max-width:var(--maxW); margin:0 auto; padding:0 20px }
+a{ color:inherit }
+
+/* helpers */
+.muted{ color:var(--muted) }
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; transition:all .18s cubic-bezier(.16,.84,.44,1); position:relative; overflow:hidden; border-radius:10px; padding:10px 14px; font-weight:600 }
+.btn:hover{ transform: translateY(-4px); box-shadow: 0 8px 30px rgba(37,99,235,0.08) }
+/* ripple */
+.ripple{ position:absolute; border-radius:50%; transform:scale(0); animation: ripple 600ms linear; background: var(--ripple-color); pointer-events:none }
+@keyframes ripple{ to{ transform:scale(4); opacity:0 } }
+.ripple-btn{ --ripple-color: rgba(37,99,235,0.08) }
+
+/* primary / secondary */
+.btn.primary{ background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff }
+.btn.secondary{ background: transparent; border:1px solid rgba(15,23,42,0.06); color: var(--text) }
+.btn.ghost, .btn.alt, .btn.outline{ background:transparent; border:1px dashed rgba(15,23,42,0.06); color:var(--muted); font-weight:700 }
+.btn.pulse{ box-shadow: 0 8px 30px rgba(37,99,235,0.06); transform: translateY(-2px) }
+
+/* card */
+.card{ background: var(--surface); border-radius:var(--radius); padding:18px; box-shadow: var(--card-shadow); border:1px solid var(--glass-border); color:var(--text) }
+
+/* subtle float animation */
+.float{ transition: transform .28s cubic-bezier(.16,.84,.44,1); }
+.float:hover{ transform: translateY(-8px) }
+
+/* small utility */
+.center{ display:flex; align-items:center; justify-content:center }
+
+/* typography */
+h1,h2,h3,h4{ color:var(--text); margin:0 }
+h1{ font-size:1.75rem; font-weight:800 }
+h2{ font-size:1.25rem; font-weight:700 }
+
+/* form elements */
+.input, input, select, textarea{ width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(15,23,42,0.06); background:var(--subtle); color:var(--text); font-size:0.95rem }
+label{ display:block; margin-bottom:6px; font-weight:700; color:var(--muted) }
+.field{ display:flex; flex-direction:column; gap:6px }
+.form-row{ display:flex; gap:12px }
+.form-row .field{ flex:1 }
+
+/* keep small legacy global for CRA demo */
+.App { text-align: center }
+@keyframes App-logo-spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }

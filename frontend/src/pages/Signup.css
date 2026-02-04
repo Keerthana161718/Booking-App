@@ -1,0 +1,21 @@
+.auth-page{ display:flex; align-items:center; justify-content:center; min-height:calc(100vh - 72px); background:linear-gradient(180deg, var(--bg-dark), rgba(18,10,28,0.95)); animation:fadeIn .5s ease; }
+.auth-card{ width:520px; padding:30px; border-radius:16px; background: linear-gradient(180deg, var(--card-bg), rgba(255,255,255,0.01)); box-shadow:0 24px 80px rgba(12,8,20,0.6); display:flex; flex-direction:column; gap:14px; border:1px solid var(--glass-border) }
+.title{ margin:0; font-size:1.7rem; color:var(--text); }
+.sub{ margin:0; color:var(--muted); font-size:0.95rem }
+label{ font-size:0.85rem; color:var(--muted); }
+input, select{ padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.03); outline:none; background:transparent; color:var(--text); -webkit-appearance:none; appearance:none }
+select{ background-image: linear-gradient(45deg, rgba(255,255,255,0.06) 50%, transparent 50%), linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.02) 50%); background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px); background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; background-color: rgba(255,255,255,0.02); color:var(--text) }
+select option{ background: var(--bg-dark); color:var(--text) }
+input:focus, select:focus{ box-shadow:0 10px 30px rgba(124,58,237,0.06); border-color:rgba(124,58,237,0.12) }
+.role-row{ display:flex; gap:12px; align-items:center }
+.role-badge{ padding:6px 10px; border-radius:999px; font-weight:700; background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:var(--text); margin-left:6px }
+.provider-block{ display:grid; grid-template-columns:1fr 140px; gap:12px; background:linear-gradient(90deg,rgba(124,58,237,0.04),rgba(91,33,182,0.02)); padding:12px; border-radius:10px }
+.provider-block .field{ display:flex; flex-direction:column; gap:6px }
+.provider-block .field.small{ max-width:140px }
+.provider-block label{ color:var(--muted) }
+.provider-block input{ background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.03); padding:10px 12px; border-radius:10px }
+.btn.primary{ margin-top:6px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:var(--text); border:none; padding:12px; border-radius:12px; font-weight:700 }
+.alert{ color:#fca5a5; padding:10px; border-radius:10px; background:rgba(255,255,255,0.02) }
+@media (max-width:600px){ .provider-block{ grid-template-columns:1fr; } .provider-block .field.small{ max-width:none } }
+.alert{ color:#b91c1c; padding:10px; border-radius:10px; background:rgba(185,28,28,0.06) }
+@keyframes fadeIn{ from{ opacity:0; transform: translateY(6px) } to{ opacity:1; transform: translateY(0) } }
