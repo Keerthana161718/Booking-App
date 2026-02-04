@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+// Set a global default base URL (user provided)
+axios.defaults.baseURL = "https://autoattend-backend.onrender.com";
+
+// Use environment variable if provided, otherwise build from the axios default base
+const API_BASE = process.env.REACT_APP_API_URL || `${axios.defaults.baseURL}/api`;
 
 const api = axios.create({
   baseURL: API_BASE,

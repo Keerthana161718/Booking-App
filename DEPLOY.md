@@ -15,7 +15,7 @@
    - `MONGO_URI` (MongoDB connection string)
    - `JWT_SECRET`
    - `EMAIL_USER`, `EMAIL_PASS` (if email is used)
-   - On Netlify: `REACT_APP_API_URL` (your backend URL + `/api`, e.g. `https://your-backend.onrender.com/api`)
+   - On Netlify: `REACT_APP_API_URL` (set this to your backend URL + `/api`, e.g. `https://booking-app-s1m8.onrender.com/api`) 
 
 ---
 
@@ -28,8 +28,8 @@
    - **Build Command**: `npm install`
    - **Start Command**: `npm start`
    - **Health check path**: `/health` (we added this endpoint)
-4. Under Environment, add the variables from "Before you start".
-5. Create the service and deploy. Note the generated service URL (e.g., `https://booking-app-backend.onrender.com`).
+4. Under Environment, add the variables from "Before you start" (use the sanitized values; do not commit secrets).
+5. Create the service and deploy. Your service URL should be: `https://booking-app-s1m8.onrender.com` — **copy this URL** to use in Netlify as `REACT_APP_API_URL`. Also ensure you do not add `PORT` as an environment variable in Render, and remove duplicate `JWT_SECRET` entries (only one `JWT_SECRET` should be present).
 
 ---
 
@@ -44,14 +44,14 @@
      publish = "build"
    ```
 4. In Netlify site settings → Build & deploy → Environment → add:
-   - `REACT_APP_API_URL` = `https://<your-render-url>/api`
+   - `REACT_APP_API_URL` = `https://booking-app-s1m8.onrender.com/api`  (exact value; ensure this is set before the first deploy so the built JS includes the correct API URL)
 5. Deploy site. Once complete, visit the published URL to confirm UI loads.
 
 ---
 
 ## After both are deployed
 - Test the UI and make sure API calls succeed (open browser console / network tab).
-- Confirm you can reach backend at `https://<your-render-url>/` and `https://<your-render-url>/health`.
+- Confirm you can reach backend at `https://booking-app-s1m8.onrender.com/` and `https://booking-app-s1m8.onrender.com/health`.
 - If CORS errors appear, open Render service dashboard and verify environment variables and URLs.
 
 ---
