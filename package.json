@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "concurrently \"cd backend && node server.js\" \"cd frontend && npm start\"",
+    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\"",
+    "start": "node backend/server.js",
+    "build": "cd frontend && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

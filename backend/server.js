@@ -28,6 +28,11 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
+// Health check for external services (Render/Load balancers)
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
 // Error middleware (last)
 const errorMiddleware = require("./middleware/errorMiddleware");
 app.use(errorMiddleware);

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: booking-app-backend
+    env: node
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+    region: oregon
+    plan: free
+    root: backend
