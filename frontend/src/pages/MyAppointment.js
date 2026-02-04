@@ -52,7 +52,6 @@ export default function MyAppointment(){
           </div>
         </div>
 
-        {loading && <div className="center" style={{padding:40}}><div className="card center"><div style={{padding:24}}><div className="muted">Loading your appointments...</div></div></div></div>}
         {error && <div className="alert">{error}</div>}
 
         <div className="ma-table">
