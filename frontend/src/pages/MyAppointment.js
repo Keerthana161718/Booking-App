@@ -4,8 +4,6 @@ import './MyAppointment.css';
 
 export default function MyAppointment(){
   const [appointments, setAppointments] = useState([]);
-  // page-level loading removed per request
-  const [loading,setLoading] = useState(false);
   const [error,setError] = useState(null);
   const [selectedDate, setSelectedDate] = useState('all');
 
