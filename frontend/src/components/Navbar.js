@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 import { UserIcon } from './Icons';
@@ -59,24 +59,24 @@ export default function Navbar() {
         </button>
 
         <ul className={`nav-links ${open ? 'open' : ''}`}>
-          <li><Link to="/">Home</Link></li>
-          {user?.role !== 'provider' && <li><Link to="/providers">Providers</Link></li>}
+          <li><NavLink to="/" className={({isActive})=>isActive ? 'active' : ''}>Home</NavLink></li>
+          {user?.role !== 'provider' && <li><NavLink to="/providers" className={({isActive})=>isActive ? 'active' : ''}>Providers</NavLink></li>}
 
           {isAuthenticated && user?.role === 'user' && (
             <>
-              <li><Link to="/my-appointments">My Appointments</Link></li>
+              <li><NavLink to="/my-appointments" className={({isActive})=>isActive ? 'active' : ''}>My Appointments</NavLink></li>
             </>
           )}
 
           {isAuthenticated && user?.role === 'provider' && (
             <>
-              <li><Link to="/provider">Dashboard {unread > 0 && <span className="badge">{unread}</span>}</Link></li>
+              <li><NavLink to="/provider" className={({isActive})=>isActive ? 'active' : ''}>Dashboard {unread > 0 && <span className="badge">{unread}</span>}</NavLink></li>
             </>
           )}
 
           {isAuthenticated && user?.role === 'admin' && (
             <>
-              <li><Link to="/admin">Admin</Link></li>
+              <li><NavLink to="/admin" className={({isActive})=>isActive ? 'active' : ''}>Admin</NavLink></li>
             </>
           )}
 

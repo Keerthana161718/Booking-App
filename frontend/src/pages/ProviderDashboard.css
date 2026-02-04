@@ -1,0 +1,99 @@
+.provider-dashboard {
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px rgba(17,24,39,0.06);
+  border: 1px solid #eef2f7;
+}
+
+.pd-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.pd-title h2 { margin: 0; font-size: 28px; letter-spacing: -0.6px; }
+.pd-sub { color: #6b7280; font-size: 13px; margin-top: 6px; }
+
+.pd-controls { display: flex; gap: 12px; align-items: center; }
+.pd-filter { display: flex; flex-direction: column; font-size: 12px; color: #444; }
+.pd-filter span { font-size: 13px; margin-bottom: 6px; color: #334155 }
+.pd-filter select { padding: 12px 14px; border-radius: 12px; border: 1px solid #e6e9ee; background: #ffffff; min-width: 180px; box-shadow: 0 6px 18px rgba(22,34,80,0.04); }
+
+/* Primary / details button style for dashboard list */
+.btn { padding: 10px 16px; border-radius: 12px; cursor: pointer; font-size: 14px; border: none }
+.btn.details { padding: 10px 18px; background: #eef6ff; color: #1b3b6f; box-shadow: 0 6px 18px rgba(45,127,249,0.06); border-radius: 12px }
+.btn.small { padding: 6px 8px; font-size: 13px; }
+.btn-danger, .btn-danger:hover { background: #e03e3e; color: #fff; box-shadow: 0 6px 12px rgba(224,62,62,0.12); }
+.btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+.pd-table { margin-top: 18px; border-radius: 12px; overflow: hidden; background: transparent }
+.pd-row { display: grid; grid-template-columns: 1.6fr 1.8fr 1fr 1fr 0.6fr 1fr; gap: 16px; align-items: center; padding: 18px 22px; border-bottom: 1px solid #f3f6fb; transition: background 120ms ease, transform 120ms ease; }
+.pd-row:hover { background: #fbfdff; transform: translateY(-1px); }
+.pd-header-row { font-weight: 700; color: #334155; background: #ffffff; border-bottom: 2px solid #e8eef8; }
+
+/* Badge tweaks */
+.badge { text-transform: capitalize; font-weight: 700; padding: 6px 12px; border-radius: 999px; font-size: 13px }
+.badge--status.booked { background: linear-gradient(180deg,#eef6ff,#e6f0ff); color: #175cd3; }
+.badge--status.cancelled { background: linear-gradient(180deg,#fff5f5,#ffecec); color: #b91c1c; }
+.badge--status.completed { background: linear-gradient(180deg,#effaf3,#e6fbef); color: #0b8a3e; }
+
+.badge--payment.pending { background: linear-gradient(180deg,#fff8ef,#fff5ee); color: #a76300; }
+.badge--payment.paid { background: linear-gradient(180deg,#eef9f2,#e6fbef); color: #0b8a3e; }
+
+/* Center status & payment columns so badges sit in the middle */
+.pd-row > .col:nth-child(3),
+.pd-row > .col:nth-child(4) {
+  text-align: center;
+}
+
+.col { font-size: 14px; }
+.pd-date-bold { font-weight: 700; color: #0f172a; }
+.pd-time { color: #6b7280; font-size: 13px; margin-top: 6px; }
+.pd-user-name { font-weight: 700; }
+.pd-user-email { font-size: 13px; color: #6b7280; margin-top: 4px; }
+
+.badge { display: inline-flex; align-items: center; justify-content: center; padding: 6px 14px; border-radius: 999px; font-size: 13px; text-transform: capitalize; font-weight: 600; min-width: 86px; }
+.badge--status.booked { background: linear-gradient(180deg,#eef6ff,#e6f0ff); color: #175cd3; }
+.badge--status.cancelled { background: linear-gradient(180deg,#fff5f5,#ffecec); color: #b91c1c; }
+.badge--status.completed { background: linear-gradient(180deg,#effaf3,#e6fbef); color: #0b8a3e; }
+
+.badge--payment.pending { background: linear-gradient(180deg,#fff8ef,#fff5ee); color: #a76300; }
+.badge--payment.paid { background: linear-gradient(180deg,#eef9f2,#e6fbef); color: #0b8a3e; }
+
+.seen { background: #ffffff; }
+.unseen { background: #fffef7; }
+
+/* Center status & payment columns so badges sit in the middle */
+.pd-row > .col:nth-child(3),
+.pd-row > .col:nth-child(4) {
+  text-align: center;
+}
+
+/* center the seen column */
+.col-1 { text-align: left; }
+.col-2 { text-align: left; }
+.col-3 { text-align: left; }
+.col-4 { text-align: left; }
+.col-5 { text-align: center; }
+.col-6 { text-align: right; }
+
+.pd-actions-cell { display: flex; gap: 12px; justify-content: flex-end; align-items: center; }
+
+.pd-empty, .pd-loading, .pd-error { padding: 26px; text-align: center; color: #666; font-size: 16px; }
+
+@media (max-width: 900px) {
+  .provider-dashboard { padding: 16px; }
+  .pd-top { flex-direction: column; align-items: flex-start; }
+  .pd-controls { width: 100%; justify-content: space-between; }
+  .pd-row { grid-template-columns: 1fr; gap: 8px; padding: 14px; }
+  .pd-row .pd-date-bold { margin-bottom: 6px; }
+  .pd-actions-cell { justify-content: flex-start; }
+  .col-5, .col-6 { text-align: left; }
+}
+
+

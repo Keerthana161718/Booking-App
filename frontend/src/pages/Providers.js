@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/apiClient';
 import { Link } from 'react-router-dom';
-import './Provider.css';
+import './Providers.css';
 
 export default function Providers(){
   const [providers,setProviders]=useState([]);
-  const [loading,setLoading]=useState(true);
   const [error,setError]=useState(null);
 
   // UI state for filters
@@ -16,7 +15,7 @@ export default function Providers(){
   const [specialties,setSpecialties]=useState([]);
 
   const fetchProviders = React.useCallback(async (params = {}) =>{
-    setLoading(true);
+    // Keep fetch quiet (no page-level loading indicator). Errors will still be shown.
     setError(null);
     try{
       const res = await api.get('/providers', { params });
@@ -32,7 +31,7 @@ export default function Providers(){
       } else {
         setError(err.response?.data?.message || err.message);
       }
-    }finally{ setLoading(false); }
+    }
   }, []);
 
   // initial load
@@ -57,7 +56,6 @@ export default function Providers(){
       <div className="container">
         <h1 className="page-title">Search Provider, Make an Appointment</h1>
 
-        {loading && <div className="center" style={{padding:40}}><div className="card center"><div style={{padding:24}}><div className="muted">Loading providers...</div></div></div></div>}
         {error && <div className="alert">{error}</div>}
 
         <div className="providers-layout">
@@ -87,18 +85,7 @@ export default function Providers(){
           </aside>
 
           <main className="list">
-            <div className="search-header">
-              <div className="search-box">
-                <input placeholder="Search name, speciality or keyword" value={searchName} onChange={e=>setSearchName(e.target.value)} />
-                <input placeholder="Phone or email" value={searchContact} onChange={e=>setSearchContact(e.target.value)} />
-                <button className="btn primary" onClick={()=> fetchProviders({ serviceType: speciality || undefined, search: searchName || undefined, contact: searchContact || undefined, country: country || undefined })}>Search</button>
-              </div>
-              <div className="header-actions">
-                <button className="btn outline">Contact Us</button>
-              </div>
-            </div>
-
-            {providers.length === 0 && !loading && <div className="muted" style={{padding:18}}>No providers match your search.</div>}
+            {providers.length === 0 && <div className="muted" style={{padding:18}}>No providers match your search.</div>}
 
             <div className="providers-grid">
               {providers.map((p)=> (
