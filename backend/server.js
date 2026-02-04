@@ -22,6 +22,8 @@ app.use("/api/providers", require("./routes/providerRoutes"));
 app.use("/api/appointments", require("./routes/appointmentRoutes"));
 app.use("/api/payments", require("./routes/paymentRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
+// Debug routes
+app.use('/api/debug', require('./routes/debugRoutes'));
 
 // Test route
 app.get("/", (req, res) => {
