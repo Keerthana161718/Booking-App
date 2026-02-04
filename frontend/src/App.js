@@ -11,7 +11,7 @@ import Providers from './pages/Providers';
 import BookAppointment from './pages/BookAppointment';
 import MyAppointment from './pages/MyAppointment';
 import AdminDashboard from './pages/AdminDashboard';
-import ProviderDashboard from './pages/ProviderDashboardNew';
+import ProviderDashboard from './pages/ProviderDashboard';
 
 function PrivateRoute({ children, roles }) {
   const { isAuthenticated, user } = useAuth();
