@@ -67,3 +67,5 @@ If you want, I can:
 - Create a `render.toml` or more advanced `render.yaml` config (I already added a basic `render.yaml`).
 - Help configure environment variables on Render and Netlify step-by-step via the UI.
 - Add a small health-check script or readiness probe if needed.
+
+> Last redeploy trigger: 2026-02-04 — Redeploy triggered to pick up correct `REACT_APP_API_URL`. I pushed a tiny commit to start Netlify build.
