@@ -28,9 +28,54 @@
 /* FILTER ROW */
 
 .filters{
-  display:flex;
-  gap:12px;
   margin-bottom:28px;
+}
+
+.filter-card{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  align-items:flex-end;
+  background:white;
+  border-radius:14px;
+  padding:20px;
+  border:1px solid #e5e7eb;
+  width:100%;
+}
+
+.filter-card h4{
+  width:100%;
+  margin:0 0 8px 0;
+  font-size:1rem;
+  color:#111827;
+}
+
+.field-group{
+  flex:1;
+  min-width:180px;
+  display:flex;
+  flex-direction:column;
+}
+
+.field-group label{
+  font-size:.9rem;
+  font-weight:500;
+  color:#374151;
+  margin-bottom:6px;
+}
+
+.field-group input,
+.field-group select{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  background:white;
+  font-size:.95rem;
+}
+
+.filter-note{
+  width:100%;
+  margin-top:8px !important;
 }
 
 .filters select{

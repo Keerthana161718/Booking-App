@@ -59,30 +59,38 @@ export default function Providers(){
         {error && <div className="alert">{error}</div>}
 
         <div className="providers-layout">
-          <aside className="filters">
+          <div className="filters">
             <div className="filter-card">
               <h4>Search Filters</h4>
 
-              <label>Search by name or specialty</label>
-              <input value={searchName} onChange={e=>setSearchName(e.target.value)} placeholder="e.g. Lena Mariana" />
+              <div className="field-group">
+                <label>Search by name or specialty</label>
+                <input value={searchName} onChange={e=>setSearchName(e.target.value)} placeholder="e.g. Lena Mariana" />
+              </div>
 
-              <label>Phone or Email</label>
-              <input value={searchContact} onChange={e=>setSearchContact(e.target.value)} placeholder="Phone or email" />
+              <div className="field-group">
+                <label>Phone or Email</label>
+                <input value={searchContact} onChange={e=>setSearchContact(e.target.value)} placeholder="Phone or email" />
+              </div>
 
-              <label>Country</label>
-              <select value={country} onChange={e=>setCountry(e.target.value)}>
-                {countries.map(c=> <option key={c} value={c}>{c}</option>)}
-              </select>
+              <div className="field-group">
+                <label>Country</label>
+                <select value={country} onChange={e=>setCountry(e.target.value)}>
+                  {countries.map(c=> <option key={c} value={c}>{c}</option>)}
+                </select>
+              </div>
 
-              <label>Speciality</label>
-              <select value={speciality} onChange={e=>setSpeciality(e.target.value)}>
-                <option value="">All</option>
-                {specialties.map(s=> <option key={s} value={s}>{s}</option>)}
-              </select>
+              <div className="field-group">
+                <label>Speciality</label>
+                <select value={speciality} onChange={e=>setSpeciality(e.target.value)}>
+                  <option value="">All</option>
+                  {specialties.map(s=> <option key={s} value={s}>{s}</option>)}
+                </select>
+              </div>
 
-              <div className="muted small" style={{marginTop:8}}>Results are fetched from server by specialization when you change filters</div>
+              <div className="muted small filter-note">Results are fetched from server by specialization when you change filters</div>
             </div>
-          </aside>
+          </div>
 
           <main className="list">
             {providers.length === 0 && <div className="muted" style={{padding:18}}>No providers match your search.</div>}
