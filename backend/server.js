@@ -1,14 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const path = require("path");
 const cors = require("cors");
 
 const connectDB = require("./config/db");
 
-// Load env variables
-dotenv.config();
+// Load env variables from backend/.env so running from project root still works
+dotenv.config({ path: path.join(__dirname, ".env") });
 
-// Connect database
-connectDB();
+// Connect database and ensure admin exists
+(async () => {
+  await connectDB();
+  // create admin user on startup if missing (uses ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME env vars)
+  try { await require('./utils/createAdmin')(); } catch(e) { console.warn('createAdmin failed:', e); }
+})();
 
 const app = express();
 
@@ -21,9 +26,10 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/providers", require("./routes/providerRoutes"));
 app.use("/api/appointments", require("./routes/appointmentRoutes"));
 app.use("/api/payments", require("./routes/paymentRoutes"));
-app.use("/api/admin", require("./routes/adminRoutes"));
-// Debug routes
 app.use('/api/debug', require('./routes/debugRoutes'));
+
+// Admin routes
+app.use('/api/admin', require('./routes/adminRoutes'));
 
 // Test route
 app.get("/", (req, res) => {

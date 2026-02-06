@@ -13,8 +13,7 @@ export default function Login() {
     setError(null);
     const res = await login({ email, password });
     if (res.success) {
-      if (res.role === 'admin') navigate('/admin');
-      else navigate('/');
+      navigate('/');
     }
   };
 

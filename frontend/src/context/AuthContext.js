@@ -55,6 +55,16 @@ export function AuthProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Allow other parts of the app to update the token without a full reload
+  useEffect(() => {
+    const onTokenUpdate = (e) => {
+      const newToken = e?.detail?.token;
+      if (newToken) setToken(newToken);
+    };
+    window.addEventListener('app:tokenUpdate', onTokenUpdate);
+    return () => window.removeEventListener('app:tokenUpdate', onTokenUpdate);
+  }, []);
+
   const handleLogin = async (credentials) => {
     setLoading(true);
     setError(null);
@@ -75,6 +85,8 @@ export function AuthProvider({ children }) {
       return { success: false, error: err };
     }
   };
+
+
 
   const handleRegister = async (payload) => {
     setLoading(true);
@@ -109,6 +121,8 @@ export function AuthProvider({ children }) {
         user,
         token,
         isAuthenticated: !!user,
+        // allow components to update the token programmatically
+        updateToken: (t) => setToken(t),
         login: handleLogin,
         register: handleRegister,
         logout: handleLogout,

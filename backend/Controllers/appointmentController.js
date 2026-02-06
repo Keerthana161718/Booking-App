@@ -64,9 +64,39 @@ exports.markAllAsSeen = async (req, res) => {
 
 // Cancel
 exports.cancelAppointment = async (req, res) => {
-  const appt = await Appointment.findById(req.params.id);
-  appt.status = "cancelled";
-  await appt.save();
+  try {
+    const appt = await Appointment.findById(req.params.id);
+    if(!appt) return res.status(404).json({ message: 'Appointment not found' });
+    if(String(appt.user) !== String(req.user.id) && String(appt.provider) !== String(req.user.id)) return res.status(403).json({ message: 'Not authorized' });
+    if(appt.status === 'completed') return res.status(400).json({ message: 'Cannot cancel a completed appointment' });
 
-  res.json({ msg: "Cancelled" });
+    appt.status = 'cancelled';
+    appt.seenByProvider = true;
+    await appt.save();
+
+    console.log(`[appointments] cancelled ${appt._id} by ${req.user.id}`);
+    res.json({ msg: 'Cancelled' });
+  } catch (err) {
+    console.error('cancelAppointment error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+exports.completedAppointment = async (req, res) => {
+  try {
+    const appt = await Appointment.findById(req.params.id);
+    if(!appt) return res.status(404).json({ message: 'Appointment not found' });
+    if(String(appt.provider) !== String(req.user.id)) return res.status(403).json({ message: 'Not authorized' });
+    if(appt.status === 'cancelled') return res.status(400).json({ message: 'Cannot complete a cancelled appointment' });
+
+    appt.status = 'completed';
+    appt.seenByProvider = true;
+    await appt.save();
+
+    console.log(`[appointments] completed ${appt._id} by ${req.user.id}`);
+    res.json({ msg: 'Completed' });
+  } catch (err) {
+    console.error('completedAppointment error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
 };

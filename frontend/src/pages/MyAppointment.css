@@ -1,34 +1,279 @@
-.my-page{ padding:28px 12px; min-height:calc(100vh - 120px); }
-.ma-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px }
-.ma-controls{ display:flex; align-items:center; gap:12px }
-.ma-filter{ display:flex; flex-direction:column; gap:6px }
-.ma-filter select{ padding:8px 10px; border-radius:8px; border:1px solid #e6e9ee; background:#fff }
+/* ---------- PAGE ---------- */
 
-.ma-table{ margin-top:8px; border-radius:8px; overflow:hidden; background:#fff; border:1px solid #f1f5f9 }
-/* now: Date | Provider | Service | Status | Payment | Actions */
-.ma-row{ display:grid; grid-template-columns: 1.5fr 1.6fr 1fr 1fr 1fr 0.8fr; gap:14px; align-items:center; padding:14px 18px; border-bottom:1px solid #f7fafc }
-.ma-header{ font-weight:700; color:#334155; background:#fbfdff }
-
-.ma-date{ font-weight:700 }
-.ma-time{ color:#6b7280; font-size:13px; margin-top:6px }
-.ma-provider{ font-weight:700 }
-.ma-provider-email{ font-size:13px }
-
-.badge{ display:inline-flex; align-items:center; justify-content:center; padding:6px 14px; border-radius:999px; font-size:13px; font-weight:700 }
-.badge--status.booked{ background:linear-gradient(180deg,#eef6ff,#e6f0ff); color:#175cd3 }
-.badge--status.cancelled{ background:linear-gradient(180deg,#fff5f5,#ffecec); color:#b91c1c }
-.badge--status.completed{ background:linear-gradient(180deg,#effaf3,#e6fbef); color:#0b8a3e }
-.badge--payment.pending{ background:linear-gradient(180deg,#fff8ef,#fff5ee); color:#a76300 }
-.badge--payment.paid{ background:linear-gradient(180deg,#eef9f2,#e6fbef); color:#0b8a3e }
-
-.ma-actions{ text-align:right }
-.btn-small{ padding:6px 10px; border-radius:8px }
-.btn-danger{ background:#ef4444; color:#fff }
-
-.alert{ color:#b91c1c; padding:10px; border-radius:10px; background:rgba(185,28,28,0.06) }
-
-@media (max-width:900px){
-  .ma-row{ grid-template-columns: 1fr; gap:8px }
-  .ma-actions{ text-align:left }
+.my-page{
+  min-height:100vh;
+  background:#f6f8fc;
+  padding:32px 20px;
 }
 
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* ---------- TYPOGRAPHY ---------- */
+
+h1{
+  font-size:34px;
+  font-weight:800;
+  color:#0f172a;
+  margin-bottom:6px;
+}
+
+.muted{
+  color:#64748b;
+  font-size:15px;
+}
+
+/* ---------- TOP SECTION ---------- */
+
+.ma-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+/* ---------- CONTROLS ---------- */
+
+.ma-controls{
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.ma-filter{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.ma-filter span{
+  font-size:14px;
+  font-weight:600;
+  color:#475569;
+}
+
+.ma-filter select{
+  padding:12px 14px;
+  min-width:220px;
+  border-radius:12px;
+  border:1px solid #e2e8f0;
+  background:#fff;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.ma-filter select:focus{
+  outline:none;
+  border-color:#6366f1;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.btn{
+  height:44px;
+  padding:0 18px;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+  color:#fff;
+  background:linear-gradient(135deg,#6366f1,#4f46e5);
+  transition:0.2s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 14px rgba(99,102,241,0.25);
+}
+
+.btn-light{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.btn-small{
+  height:36px;
+  padding:0 14px;
+  font-size:13px;
+}
+
+.btn-danger{
+  background:linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.btn-danger:hover{
+  box-shadow:0 6px 14px rgba(239,68,68,0.25);
+}
+
+/* ---------- ALERT ---------- */
+
+.alert{
+  background:#fee2e2;
+  color:#b91c1c;
+  padding:14px;
+  border-radius:12px;
+  margin-bottom:16px;
+}
+
+/* ---------- TABLE ---------- */
+
+.ma-table{
+  background:#fff;
+  border-radius:18px;
+  padding:12px;
+  box-shadow:0 10px 30px rgba(15,23,42,0.06);
+}
+
+/* ---------- ROW ---------- */
+
+.ma-row{
+  display:grid;
+  grid-template-columns: 1.6fr 1.4fr 1fr 1fr 1fr 1fr;
+  align-items:center;
+  gap:16px;
+  padding:18px;
+  border-radius:14px;
+  transition:0.2s;
+}
+
+.ma-row:not(.ma-header){
+  border-bottom:1px solid #f1f5f9;
+}
+
+.ma-row:hover{
+  background:#f9fafb;
+}
+
+/* ---------- HEADER ---------- */
+
+.ma-header{
+  font-weight:700;
+  color:#475569;
+  border-bottom:1px solid #e5e7eb;
+}
+
+/* ---------- CELLS ---------- */
+
+.ma-date{
+  font-weight:700;
+  color:#0f172a;
+}
+
+.ma-time{
+  font-size:13px;
+  color:#64748b;
+  margin-top:4px;
+}
+
+.ma-provider{
+  font-weight:600;
+}
+
+.ma-provider-email{
+  font-size:13px;
+  color:#64748b;
+}
+
+.ma-actions{
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* ---------- BADGES ---------- */
+
+.badge{
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  text-transform:capitalize;
+}
+
+/* Status */
+
+/* Support both `.badge--status.cancelled` and `.badge--status.badge--cancelled` naming patterns */
+.badge--status.booked,
+.badge--status.badge--booked{
+  background:#e0e7ff;
+  color:#3730a3;
+}
+
+.badge--status.cancelled,
+.badge--status.badge--cancelled{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.badge--status.completed,
+.badge--status.badge--completed{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+/* Payment */
+
+.badge--payment.pending,
+.badge--payment.badge--pending{
+  background:#fef3c7;
+  color:#a16207;
+}
+
+.badge--payment.paid,
+.badge--payment.badge--paid{
+  background:#dcfce7;
+  color:#15803d;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width:768px){
+
+  .ma-header{
+    display:none;
+  }
+
+  .ma-row{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:16px;
+    margin-bottom:14px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 6px 18px rgba(0,0,0,0.05);
+  }
+
+  /* Label system */
+  .ma-row > div::before{
+    content:attr(data-label);
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:#64748b;
+    margin-bottom:2px;
+  }
+
+  .ma-actions{
+    justify-content:flex-start;
+  }
+
+  .btn-danger{
+    width:100%;
+  }
+
+  .ma-filter select{
+    width:100%;
+  }
+
+  .ma-controls{
+    width:100%;
+  }
+
+  .btn{
+    width:100%;
+  }
+}

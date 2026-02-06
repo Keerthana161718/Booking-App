@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 import { UserIcon } from './Icons';
@@ -10,6 +10,12 @@ export default function Navbar() {
   const [unread, setUnread] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // close mobile menu on navigation
+  useEffect(()=>{
+    setOpen(false);
+  },[location.pathname]);
 
   useEffect(()=>{
     const onScroll = ()=> setScrolled(window.scrollY > 12);
@@ -60,7 +66,8 @@ export default function Navbar() {
 
         <ul className={`nav-links ${open ? 'open' : ''}`}>
           <li><NavLink to="/" className={({isActive})=>isActive ? 'active' : ''}>Home</NavLink></li>
-          {user?.role !== 'provider' && <li><NavLink to="/providers" className={({isActive})=>isActive ? 'active' : ''}>Providers</NavLink></li>}
+          {/* Show providers list to public visitors and regular users only (hide for providers and admins) */}
+          {(!user || user.role === 'user') && <li><NavLink to="/providers" className={({isActive})=>isActive ? 'active' : ''}>Providers</NavLink></li>}
 
           {isAuthenticated && user?.role === 'user' && (
             <>
@@ -74,11 +81,7 @@ export default function Navbar() {
             </>
           )}
 
-          {isAuthenticated && user?.role === 'admin' && (
-            <>
-              <li><NavLink to="/admin" className={({isActive})=>isActive ? 'active' : ''}>Admin</NavLink></li>
-            </>
-          )}
+
 
           {!isAuthenticated ? (
             <>
@@ -87,7 +90,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <li className="welcome">Hi, <strong style={{display:'inline-flex',alignItems:'center',gap:8}}><UserIcon size={16}/> {user?.name || user?.email}</strong></li>
+              <li className="welcome">Hi, <strong style={{display:'inline-flex',alignItems:'center',gap:8}}><Link to="/profile" className="profile-link" title="View profile"><UserIcon size={16}/> {user?.name || user?.email}</Link></strong></li>
               <li><button className="btn secondary" onClick={handleLogout}>Logout</button></li>
             </>
           )}
