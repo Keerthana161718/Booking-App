@@ -1,2 +1,16 @@
+# Environment variables - NEVER commit these!
 .env
+.env.local
+.env.*.local
+
+# Dependencies
 node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.DS_Store

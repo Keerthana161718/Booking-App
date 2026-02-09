@@ -176,7 +176,7 @@ export default function AdminDashboard(){
                       <tr key={p._id || p.id}>
                         <td><strong>{p.name || 'N/A'}</strong></td>
                         <td>{p.email}</td>
-                        <td>{p.service || 'N/A'}</td>
+                        <td>{p.serviceType || 'N/A'}</td>
                         <td><span className="status-badge active">Active</span></td>
                         <td>{new Date(p.createdAt).toLocaleDateString() || 'N/A'}</td>
                         <td>
