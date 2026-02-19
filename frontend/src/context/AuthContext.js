@@ -76,6 +76,8 @@ export function AuthProvider({ children }) {
     }
   };
 
+
+
   const handleRegister = async (payload) => {
     setLoading(true);
     setError(null);

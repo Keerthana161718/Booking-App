@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { ADMIN_USERNAME, ADMIN_PASSWORD } = require('../config/adminConfig');
 
 // Generate JWT
 const generateToken = (id, role, name) => {
@@ -48,22 +47,8 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // ADMIN LOGIN - only the hard-coded credentials in config/adminConfig.js are accepted
-    if (typeof email === 'string' && ADMIN_USERNAME) {
-      const input = email.trim().toLowerCase();
-      const adminName = ADMIN_USERNAME.trim().toLowerCase();
-      const matchAdmin = input === adminName;
-      console.info(`Admin login attempt for identifier: "${email}" -> match:${matchAdmin}`);
-
-      if (matchAdmin && password === ADMIN_PASSWORD) {
-        // return a valid JWT for admin so the frontend can set auth state
-        return res.json({
-          token: generateToken('admin', 'admin', 'Administrator'),
-          role: "admin",
-          message: "Admin login success",
-        });
-      }
-    }
+    // admin login removed - continue with normal user/provider auth flow
+    // (no special-case admin handling) 
 
     // allow login by email or username (case-insensitive exact match)
     const identifier = (email || '').trim();
@@ -82,5 +67,45 @@ exports.login = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+
+/* =========================
+   PROFILE ENDPOINTS
+========================= */
+
+// Get current user profile
+exports.getProfile = async (req, res) => {
+  try {
+    // req.user is populated by auth middleware (without password)
+    res.json(req.user);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Update current user profile
+exports.updateProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const { name, phone, serviceType, experience } = req.body;
+
+    if (name) user.name = name;
+    if (phone !== undefined) user.phone = phone;
+    if (serviceType !== undefined) user.serviceType = serviceType;
+    if (experience !== undefined) user.experience = experience;
+
+    await user.save();
+
+    // Return a refreshed token so client can reflect updated name in JWT payload
+    const token = generateToken(user._id, user.role, user.name);
+
+    res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone, role: user.role, serviceType: user.serviceType, experience: user.experience } });
+  } catch (err) {
+    console.error('updateProfile error:', err);
+    res.status(500).json({ message: 'Server error' });
   }
 };

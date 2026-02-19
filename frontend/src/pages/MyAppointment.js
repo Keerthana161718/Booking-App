@@ -84,7 +84,7 @@ export default function MyAppointment(){
                 <span className={`badge badge--payment badge--${a.paymentStatus}`}>{a.paymentStatus}</span>
               </div>
               <div className="col col-1 ma-actions">
-                {a.status !== 'cancelled' && <button className="btn btn-small btn-danger" onClick={()=>cancel(a._id||a.id)}>Cancel</button>}
+                {a.status !== 'cancelled' && a.status !== 'completed' && <button className="btn btn-small btn-danger" onClick={()=>cancel(a._id||a.id)}>Cancel</button>}
               </div>
             </div>
           ))}

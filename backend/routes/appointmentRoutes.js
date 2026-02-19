@@ -7,6 +7,7 @@ const {
   markAsSeen,
   markAllAsSeen,
   cancelAppointment,
+  completedAppointment,
 } = require("../Controllers/appointmentController");
 
 const auth = require("../middleware/authMiddleware");
@@ -29,5 +30,9 @@ router.put("/seen-all", auth, markAllAsSeen);
 
 // Cancel
 router.put("/cancel/:id", auth, cancelAppointment);
+
+// Complete (both /completed and legacy /complete for backwards compatibility)
+router.put("/completed/:id", auth, completedAppointment);
+router.put("/complete/:id", auth, completedAppointment);
 
 module.exports = router;

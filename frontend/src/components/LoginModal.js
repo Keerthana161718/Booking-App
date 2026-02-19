@@ -25,8 +25,7 @@ export default function LoginModal(){
     const res = await login({ email, password });
     if(res.success){
       closeLoginModal();
-      if(res.role === 'admin') navigate('/admin');
-      else navigate('/');
+      navigate('/');
     }
   };
 

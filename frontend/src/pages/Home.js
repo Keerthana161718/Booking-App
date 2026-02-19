@@ -5,7 +5,7 @@ import './Home.css';
 
 export default function Home(){
   const navigate = useNavigate();
-  const { isAuthenticated, openLoginModal } = useAuth();
+  const { isAuthenticated, openLoginModal, user } = useAuth();
   const [providers, setProviders] = React.useState([]);
 
   const handleGetStarted = () => {
@@ -36,8 +36,14 @@ export default function Home(){
           <p className="lead">Fast, easy, and secure booking. Manage appointments and payments in one place.</p>
 
           <div className="cta">
-            <Link to="/providers" className="btn ripple-btn pulse">Find Providers</Link>
-            <button className="btn alt ripple-btn" onClick={handleGetStarted}>Get Started</button>
+            {user?.role === 'admin' ? (
+              <Link to="/admin" className="btn ripple-btn pulse">Admin Dashboard</Link>
+            ) : (
+              <>
+                <Link to="/providers" className="btn ripple-btn pulse">Find Providers</Link>
+                <button className="btn alt ripple-btn" onClick={handleGetStarted}>Get Started</button>
+              </>
+            )}
           </div>
 
           {providers.length > 0 && (

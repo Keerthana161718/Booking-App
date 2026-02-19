@@ -14,5 +14,8 @@
   "description": "",
   "dependencies": {
     "concurrently": "^9.2.1"
+  },
+  "devDependencies": {
+    "axios": "^1.13.4"
   }
 }

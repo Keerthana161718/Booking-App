@@ -11,15 +11,20 @@ import Providers from './pages/Providers';
 import BookAppointment from './pages/BookAppointment';
 import MyAppointment from './pages/MyAppointment';
 import AdminDashboard from './pages/AdminDashboard';
-import ProviderDashboard from './pages/ProviderDashboard';
-import Provider from './pages/Provider';
+import Provider, { ProviderDashboard } from './pages/ProviderDashboard';
+import Profile from './pages/Profile';
+
+
 
 function PrivateRoute({ children, roles }) {
   const { isAuthenticated, user } = useAuth();
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (roles && roles.length && !roles.includes(user?.role)) return <Navigate to="/" replace />;
+  if (!isAuthenticated) {
+    // send to general login page
+    return <Navigate to={'/login'} replace />;
+  }
+  if (roles && roles.length && !roles.includes(user?.role)) return <Navigate to={'/'} replace />;
   return children;
-}
+} 
 
 function ModalRouteSync(){
   const { openLoginModal, openSignupModal } = useAuth();
@@ -58,6 +63,8 @@ function AppRoutes() {
     const { user } = useAuth();
     // If a logged-in provider tries to open the public providers list, send them to their dashboard
     if(user?.role === 'provider') return <Navigate to="/provider" replace />;
+    // If admin visits /providers, send them to admin dashboard
+    if(user?.role === 'admin') return <Navigate to="/admin" replace />;
     return <Providers />;
   }
 
@@ -71,14 +78,16 @@ function AppRoutes() {
           <ModalRouteSync />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+  
             <Route path="/providers" element={<ProvidersEntry />} />
-            <Route path="/provider/:id" element={<Provider />} />
             <Route path="/book/:id" element={<PrivateRoute><BookAppointment /></PrivateRoute>} />
             <Route path="/my-appointments" element={<PrivateRoute><MyAppointment /></PrivateRoute>} />
             <Route path="/login" element={<Home />} />
             <Route path="/signup" element={<Home />} />
             <Route path="/admin" element={<PrivateRoute roles={["admin"]}><AdminDashboard /></PrivateRoute>} />
             <Route path="/provider" element={<PrivateRoute roles={["provider"]}><ProviderDashboard /></PrivateRoute>} />
+            <Route path="/provider/:id" element={<Provider />} />
           </Routes>
         </main>
         <Footer />
